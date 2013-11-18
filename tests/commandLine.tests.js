@@ -11,7 +11,7 @@ describe('commandLine.js', function() {
         };
 
         var commandLine = proxyquire('../libs/commandLine', {
-            './server': serverStub
+            './server': { Server: sinon.stub().returns(serverStub) }
         });
 
         commandLine.run();
