@@ -1,6 +1,8 @@
+exports.run = runServer;
+
 var Server = require('./server').Server;
 
-exports.run = function() {
-    var server = new Server();
-    server.start();
-};
+function runServer() {
+  var server = new Server();
+  server.start();
+}

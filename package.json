@@ -1,25 +1,23 @@
 {
-    "name": "jacobsoft.stage",
-    "version": "0.0.1",
-    "repository": "https://github.com/apoco/jacobsoft.stage",
-
-    "scripts": {
-        "start": "node main.js"
-    },
-
-    "bin": {
-        "stage": "main.js"
-    },
-
-    "dependencies": {
-        "commander": "2.0.0"
-    },
-
-    "devDependencies": {
-        "mocha": "1.14.0",
-        "chai": "1.8.1",
-        "sinon": "1.7.3",
-        "sinon-chai": "2.4.0",
-        "proxyquire": "0.5.1"
-    }
+  "name": "stage",
+  "version": "0.0.1",
+  "repository": "https://github.com/apoco/stage",
+  "scripts": {
+    "start": "node main.js",
+    "test": "./node_modules/mocha/bin/mocha ./tests/integration"
+  },
+  "bin": {
+    "stage": "main.js"
+  },
+  "dependencies": {
+    "commander": "2.0.0",
+    "bluebird": "~2.3.11"
+  },
+  "devDependencies": {
+    "mocha": "1.14.0",
+    "chai": "1.8.1",
+    "sinon": "1.7.3",
+    "sinon-chai": "2.4.0",
+    "proxyquire": "0.5.1"
+  }
 }
