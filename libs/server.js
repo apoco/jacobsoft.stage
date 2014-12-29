@@ -1,6 +1,7 @@
 exports.Server = Server;
 
-function Server() {
+function Server(opts) {
+  this.options = opts;
 }
 
 Server.prototype.start = function() {
@@ -8,7 +9,7 @@ Server.prototype.start = function() {
 
   });
 
-  var port = 51463;
+  var port = this.options.port;
   server.listen(port);
   console.log('\nListening on port ' + port + '...\n');
 };

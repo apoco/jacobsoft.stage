@@ -21,8 +21,36 @@ To install Stage, simply run "npm install -g stage"
 ## Running
 
 If you installed via NPM, there should be a "stage" executable in your path. Running "stage" will start the
-server with default settings.
+server with default settings. To customize settings, either add the appropriate options to the command line
+or place the option in a JSON config file. The following settings are available:
 
+<table>
+  <thead>
+    <tr>
+      <th>Command line option</th>
+      <th>Config file property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        --config &lt;path/to/config.json&gt;<br/>
+        -c &lt;path/to/config.json&gt;
+      </td>
+      <td>N/A</td>
+      <td>The JSON file to use for configuration settings</td>
+    </tr>
+    <tr>
+      <td>
+        --port &lt;TCP port&gt;<br/>
+        -p &lt;TCP port&gt;
+      </td>
+      <td>port</td>
+      <td>The TCP port the stage instance will listen on</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Stage Clusters
 
