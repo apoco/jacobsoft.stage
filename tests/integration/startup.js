@@ -1,3 +1,5 @@
+var expect = require('chai').expect;
+
 var childProcess = require('child_process');
 var net = require('net');
 var path = require('path');
@@ -5,6 +7,29 @@ var promiseUtils = require('../../libs/utils/promise-utils');
 
 describe('The startup script', function() {
   var configFile = path.resolve(__dirname, './config.json');
+
+  describe('shows a help message when it', function() {
+    it('is passed a --help option', function(done) {
+      return verifyHelpMessage(['--help'])
+        .then(function() { done(); })
+        .catch(done);
+    });
+
+    it('is passed an -h option', function(done) {
+      return verifyHelpMessage(['-h'])
+        .then(function() { done(); })
+        .catch(done);
+    });
+
+    function verifyHelpMessage(args) {
+      var server = startWithArgs(args);
+      return promiseUtils.resolveOnEvent(server.stdout, 'data')
+        .then(function(chunk) {
+          var text = chunk.toString('utf8');
+          expect(text).to.match(/Options:/);
+        });
+    }
+  });
 
   it('opens a listener on port 51463 by default', function() {
     return verifyListenerOnPort([], 51463);
@@ -36,8 +61,12 @@ describe('The startup script', function() {
     });
   });
 
+  function startWithArgs(args) {
+    return childProcess.fork('../../main', args, { silent: true });
+  }
+
   function verifyListenerOnPort(args, port) {
-    var server = childProcess.fork('../../main', args, { silent: true });
+    var server = startWithArgs(args);
     return promiseUtils.resolveOnEvent(server.stdout, 'data')
       .then(function() {
         var connection = net.connect({ port: port });
