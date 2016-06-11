@@ -1,15 +1,32 @@
-exports.Server = Server;
+const defaultOptions = {
+  port: 51463
+};
 
-function Server(opts) {
-  this.options = opts;
+class StageServer {
+  constructor(opts) {
+    this.options = {...defaultOptions, ...opts};
+    this.isListening = false;
+  }
+
+  start() {
+    return new Promise((resolve, reject) => {
+      this.server = require('net').createServer();
+
+      this.server
+        .on('error', reject)
+        .once('listening', () => {
+          this.isListening = true;
+          resolve(this);
+        })
+        .listen(this.options.port);
+      console.log('\nListening on port ' + this.options.port + '...\n');
+    });
+  }
+
+  stop() {
+    if (this.isListening)
+      this.server.close();
+  }
 }
 
-Server.prototype.start = function() {
-  var server = require('net').createServer(function(connection) {
-
-  });
-
-  var port = this.options.port;
-  server.listen(port);
-  console.log('\nListening on port ' + port + '...\n');
-};
+module.exports = StageServer;

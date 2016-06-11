@@ -1,8 +1,6 @@
-exports.run = runServer;
+const Server = require('./server').Server;
 
-var Server = require('./server').Server;
-
-var args = require('yargs')
+const args = require('yargs')
   .config('config')
   .config('c')
   .options('port', {
@@ -15,6 +13,8 @@ var args = require('yargs')
   .argv;
 
 function runServer() {
-  var server = new Server(args);
+  const server = new Server(args);
   server.start();
 }
+
+exports.run = runServer;
